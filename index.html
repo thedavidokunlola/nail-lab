@@ -135,6 +135,19 @@
             pointer-events: all;
         }
 
+        /* Mobile hamburger animation */
+        #menu-toggle.active #bar1 {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+        #menu-toggle.active #bar2 {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        #menu-toggle.active #bar3 {
+            width: 1.5rem;
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
         /* Gallery hover overlay */
         .gallery-card .gallery-hover {
             opacity: 0;
@@ -211,9 +224,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 lg:h-24">
                 <!-- Logo -->
-                <a href="#home" class="flex items-center gap-3 group" aria-label="The Nail Lab Home">
-                    <img src="logo/logo.png" alt="The Nail Lab Logo" class="h-14 sm:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
-                    <span class="font-heading text-lg sm:text-xl tracking-super-wide uppercase text-dark">The Nail Lab</span>
+                <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group min-w-0" aria-label="The Nail Lab Home">
+                    <img src="logo/logo.png" alt="The Nail Lab Logo" class="h-12 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
+                    <span class="font-heading text-sm sm:text-lg lg:text-xl tracking-wider sm:tracking-super-wide uppercase text-dark truncate">The Nail Lab</span>
                 </a>
 
                 <!-- Desktop Nav -->
@@ -229,7 +242,7 @@
                 </a>
 
                 <!-- Mobile Hamburger -->
-                <button id="menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5" aria-label="Open menu" aria-expanded="false">
+                <button id="menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 focus:outline-none focus:ring-1 focus:ring-rose/30 rounded-lg transition-colors" aria-label="Open menu" aria-expanded="false">
                     <span class="block w-6 h-[1.5px] bg-dark transition-all duration-300 origin-center" id="bar1"></span>
                     <span class="block w-6 h-[1.5px] bg-dark transition-all duration-300" id="bar2"></span>
                     <span class="block w-4 h-[1.5px] bg-dark transition-all duration-300 origin-center ml-auto" id="bar3"></span>
@@ -239,25 +252,25 @@
     </header>
 
     <!-- Mobile Overlay -->
-    <div id="mobile-overlay" class="mobile-overlay fixed inset-0 bg-dark/30 z-50 backdrop-blur-sm"></div>
+    <div id="mobile-overlay" class="mobile-overlay fixed inset-0 bg-dark/40 z-50 backdrop-blur-sm"></div>
 
     <!-- Mobile Menu Panel -->
-    <nav id="mobile-menu" class="mobile-menu-panel fixed top-0 right-0 h-full w-72 sm:w-80 bg-cream z-50 flex flex-col" aria-label="Mobile navigation">
-        <div class="flex items-center justify-between px-6 h-20 border-b border-warm-border">
+    <nav id="mobile-menu" class="mobile-menu-panel fixed top-0 right-0 h-full h-[100dvh] w-72 sm:w-80 bg-cream z-50 flex flex-col shadow-2xl overflow-y-auto" aria-label="Mobile navigation">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-warm-border flex-shrink-0">
             <div class="flex items-center gap-2.5">
                 <img src="logo/logo.png" alt="The Nail Lab Logo" class="h-10 w-auto object-contain">
                 <span class="font-heading tracking-super-wide uppercase text-sm">The Nail Lab</span>
             </div>
-            <button id="menu-close" class="w-10 h-10 flex items-center justify-center" aria-label="Close menu">
-                <svg class="w-5 h-5 text-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            <button id="menu-close" class="w-10 h-10 flex items-center justify-center text-dark hover:text-rose transition-colors focus:outline-none" aria-label="Close menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
         </div>
-        <div class="flex flex-col px-6 py-8 gap-6">
+        <div class="flex flex-col px-6 py-8 gap-6 flex-grow">
             <a href="#home" class="mobile-link font-heading text-lg tracking-widest uppercase text-dark hover:text-rose transition-colors">Home</a>
             <a href="#services" class="mobile-link font-heading text-lg tracking-widest uppercase text-dark hover:text-rose transition-colors">Services</a>
             <a href="#gallery" class="mobile-link font-heading text-lg tracking-widest uppercase text-dark hover:text-rose transition-colors">Gallery</a>
-            <div class="border-t border-warm-border pt-6 mt-2">
-                <a href="#book" class="block text-center bg-rose text-white font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose-dark transition-colors">Book Appointment</a>
+            <div class="border-t border-warm-border pt-6 mt-auto">
+                <a href="#book" class="mobile-link block text-center bg-rose text-white font-medium tracking-wide px-6 py-3.5 rounded-full hover:bg-rose-dark transition-colors shadow-warm">Book Appointment</a>
             </div>
         </div>
     </nav>
@@ -286,22 +299,22 @@
             <!-- Text Content -->
             <div class="flex flex-col justify-center py-4 lg:py-0">
                 <div class="anim-fade-left">
-                    <span class="inline-block text-rose text-xs font-medium tracking-super-wide uppercase mb-4">Premium Nail &amp; Beauty Studio</span>
-                    <div class="w-16 h-[1px] bg-gold mb-6"></div>
-                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl text-dark leading-tight tracking-wide mb-6">
+                    <span class="inline-block text-rose text-xs font-medium tracking-super-wide uppercase mb-3 sm:mb-4">Premium Nail &amp; Beauty Studio</span>
+                    <div class="w-16 h-[1px] bg-gold mb-5 sm:mb-6"></div>
+                    <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl text-dark leading-tight tracking-wide mb-4 sm:mb-6">
                         Where Beauty Becomes an Art Form
                     </h1>
                 </div>
                 <div class="anim-fade-left delay-2">
-                    <p class="text-grey text-base sm:text-lg font-light leading-relaxed max-w-lg mb-8">
+                    <p class="text-grey text-sm sm:text-lg font-light leading-relaxed max-w-lg mb-6 sm:mb-8">
                         Indulge in luxury nail care, pedicures, and beauty treatments crafted just for you — because you deserve nothing less.
                     </p>
                 </div>
-                <div class="flex flex-wrap gap-3 mb-8 anim-fade-left delay-3">
-                    <a href="#book" class="bg-rose text-white text-sm font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose-dark transition-colors shadow-warm">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 anim-fade-left delay-3 w-full sm:w-auto">
+                    <a href="#book" class="w-full sm:w-auto text-center bg-rose text-white text-sm font-medium tracking-wide px-6 py-3.5 rounded-full hover:bg-rose-dark transition-colors shadow-warm">
                         Book Your Appointment
                     </a>
-                    <a href="#services" class="border border-rose text-rose text-sm font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose/30 hover:text-rose transition-all duration-300">
+                    <a href="#services" class="w-full sm:w-auto text-center border border-rose text-rose text-sm font-medium tracking-wide px-6 py-3.5 rounded-full hover:bg-rose/30 hover:text-rose transition-all duration-300">
                         Explore Services
                     </a>
                 </div>
@@ -375,14 +388,14 @@
             </div>
 
             <!-- Tabs -->
-            <div class="flex justify-center gap-2 sm:gap-4 mb-10 anim-fade-up delay-1">
-                <button class="tab-btn active font-body text-sm sm:text-base tracking-wide px-4 sm:px-6 py-2.5 border-b-2 border-rose text-dark transition-all hover:bg-blush/50 rounded-t" data-tab="nails">
+            <div class="flex justify-center flex-wrap gap-1.5 sm:gap-4 mb-8 sm:mb-10 anim-fade-up delay-1">
+                <button class="tab-btn active font-body text-xs sm:text-sm lg:text-base tracking-wide px-3 sm:px-6 py-2 sm:py-2.5 border-b-2 border-rose text-dark transition-all hover:bg-blush/50 rounded-t" data-tab="nails">
                     Nail Services
                 </button>
-                <button class="tab-btn font-body text-sm sm:text-base tracking-wide px-4 sm:px-6 py-2.5 border-b-2 border-transparent text-grey transition-all hover:bg-blush/50 rounded-t" data-tab="pedicure-tab">
+                <button class="tab-btn font-body text-xs sm:text-sm lg:text-base tracking-wide px-3 sm:px-6 py-2 sm:py-2.5 border-b-2 border-transparent text-grey transition-all hover:bg-blush/50 rounded-t" data-tab="pedicure-tab">
                     Pedicure Spa
                 </button>
-                <button class="tab-btn font-body text-sm sm:text-base tracking-wide px-4 sm:px-6 py-2.5 border-b-2 border-transparent text-grey transition-all hover:bg-blush/50 rounded-t" data-tab="beauty">
+                <button class="tab-btn font-body text-xs sm:text-sm lg:text-base tracking-wide px-3 sm:px-6 py-2 sm:py-2.5 border-b-2 border-transparent text-grey transition-all hover:bg-blush/50 rounded-t" data-tab="beauty">
                     Beauty Treatments
                 </button>
             </div>
@@ -687,7 +700,7 @@
                             <div>
                                 <label for="fullName" class="block text-sm font-medium tracking-wide mb-1.5">Full Name</label>
                                 <input type="text" id="fullName" name="fullName" required placeholder="Your full name"
-                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
                                 <span class="field-error text-rose text-xs mt-1 hidden"></span>
                             </div>
                             <!-- Phone -->
@@ -695,13 +708,13 @@
                                 <div>
                                     <label for="phone" class="block text-sm font-medium tracking-wide mb-1.5">Phone Number</label>
                                     <input type="tel" id="phone" name="phone" required placeholder="+1 604-753-9963"
-                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
                                     <span class="field-error text-rose text-xs mt-1 hidden"></span>
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium tracking-wide mb-1.5">Email Address</label>
                                     <input type="email" id="email" name="email" required placeholder="you@example.com"
-                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
                                     <span class="field-error text-rose text-xs mt-1 hidden"></span>
                                 </div>
                             </div>
@@ -709,7 +722,7 @@
                             <div>
                                 <label for="artist" class="block text-sm font-medium tracking-wide mb-1.5">Select Artist</label>
                                 <select id="artist" name="artist" required
-                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
+                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
                                     <option value="" disabled selected>Choose your artist</option>
                                     <option value="sophia">Sophia Laurent</option>
                                     <option value="amara">Amara Osei</option>
@@ -724,7 +737,7 @@
                                 <div>
                                     <label for="category" class="block text-sm font-medium tracking-wide mb-1.5">Service Category</label>
                                     <select id="category" name="category" required
-                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
                                         <option value="" disabled selected>Select a category</option>
                                         <option value="nails">Nail Services</option>
                                         <option value="pedicure">Pedicure Spa</option>
@@ -735,7 +748,7 @@
                                 <div>
                                     <label for="service" class="block text-sm font-medium tracking-wide mb-1.5">Specific Service</label>
                                     <select id="service" name="service" required
-                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
                                         <option value="" disabled selected>Select category first</option>
                                     </select>
                                     <span class="field-error text-rose text-xs mt-1 hidden"></span>
@@ -746,13 +759,13 @@
                                 <div>
                                     <label for="date" class="block text-sm font-medium tracking-wide mb-1.5">Preferred Date</label>
                                     <input type="date" id="date" name="date" required
-                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
                                     <span class="field-error text-rose text-xs mt-1 hidden"></span>
                                 </div>
                                 <div>
                                     <label for="time" class="block text-sm font-medium tracking-wide mb-1.5">Preferred Time</label>
                                     <input type="time" id="time" name="time" required
-                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
                                     <span class="field-error text-rose text-xs mt-1 hidden"></span>
                                 </div>
                             </div>
@@ -760,7 +773,7 @@
                             <div>
                                 <label for="requests" class="block text-sm font-medium tracking-wide mb-1.5">Special Requests</label>
                                 <textarea id="requests" name="requests" rows="3" placeholder="Any special requests or design inspiration..."
-                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors resize-none"></textarea>
+                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-base sm:text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors resize-none"></textarea>
                             </div>
                             <!-- Submit -->
                             <button type="submit" id="submit-btn"
@@ -954,22 +967,38 @@
         function openMenu() {
             mobileMenu.classList.add('open');
             mobileOverlay.classList.add('open');
+            menuToggle.classList.add('active');
             document.body.style.overflow = 'hidden';
             menuToggle.setAttribute('aria-expanded', 'true');
         }
         function closeMenu() {
             mobileMenu.classList.remove('open');
             mobileOverlay.classList.remove('open');
+            menuToggle.classList.remove('active');
             document.body.style.overflow = '';
             menuToggle.setAttribute('aria-expanded', 'false');
         }
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
 
-        menuToggle.addEventListener('click', openMenu);
+        menuToggle.addEventListener('click', toggleMenu);
         menuClose.addEventListener('click', closeMenu);
         mobileOverlay.addEventListener('click', closeMenu);
 
-        // Close menu on link click
-        document.querySelectorAll('.mobile-link').forEach(link => {
+        // Close menu on ESC key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                closeMenu();
+            }
+        });
+
+        // Close menu on any link click inside the mobile menu drawer
+        mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
