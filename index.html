@@ -137,15 +137,14 @@
 
         /* Mobile hamburger animation */
         #menu-toggle.active #bar1 {
-            transform: translateY(7.5px) rotate(45deg);
+            transform: translateY(7px) rotate(45deg);
         }
         #menu-toggle.active #bar2 {
             opacity: 0;
             transform: scaleX(0);
         }
         #menu-toggle.active #bar3 {
-            width: 1.5rem;
-            transform: translateY(-7.5px) rotate(-45deg);
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Gallery hover overlay */
@@ -242,10 +241,10 @@
                 </a>
 
                 <!-- Mobile Hamburger -->
-                <button id="menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 focus:outline-none focus:ring-1 focus:ring-rose/30 rounded-lg transition-colors" aria-label="Open menu" aria-expanded="false">
-                    <span class="block w-6 h-[1.5px] bg-dark transition-all duration-300 origin-center" id="bar1"></span>
-                    <span class="block w-6 h-[1.5px] bg-dark transition-all duration-300" id="bar2"></span>
-                    <span class="block w-4 h-[1.5px] bg-dark transition-all duration-300 origin-center ml-auto" id="bar3"></span>
+                <button id="menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px] rounded-lg hover:bg-blush/40 transition-colors focus:outline-none focus:ring-1 focus:ring-rose/30 p-2" aria-label="Open menu" aria-expanded="false">
+                    <span class="block w-6 h-[2px] bg-dark rounded-full transition-all duration-300 origin-center" id="bar1"></span>
+                    <span class="block w-6 h-[2px] bg-dark rounded-full transition-all duration-300 origin-center" id="bar2"></span>
+                    <span class="block w-6 h-[2px] bg-dark rounded-full transition-all duration-300 origin-center" id="bar3"></span>
                 </button>
             </div>
         </div>
