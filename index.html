@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Nail Lab — Premium nail art, manicures, pedicures, and luxury beauty treatments. Where beauty becomes an art form. Book your appointment today.">
+    <meta name="keywords" content="nail art, manicure, pedicure, beauty studio, gel nails, acrylic nails, nail extensions, luxury spa">
+    <title>The Nail Lab — Premium Nail &amp; Beauty Studio</title>
+    <link rel="icon" type="image/png" href="logo/logo.png">
+    <link rel="apple-touch-icon" href="logo/logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#faf7f4',
+                        rose: '#c9727a',
+                        'rose-dark': '#b5616a',
+                        blush: '#f2ddd9',
+                        gold: '#c8a97e',
+                        dark: '#1c1c1c',
+                        'warm-border': '#e8ddd8',
+                        grey: '#7a7a7a',
+                    },
+                    fontFamily: {
+                        heading: ['"Didact Gothic"', 'sans-serif'],
+                        body: ['"Jost"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        warm: '0 4px 24px rgba(201,114,122,0.08)',
+                        'warm-lg': '0 8px 32px rgba(201,114,122,0.12)',
+                    },
+                    letterSpacing: {
+                        'super-wide': '0.25em',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles (keyframes & animation classes) -->
+    <style>
+        /* Marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+            animation: marquee 25s linear infinite;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Scroll entrance animations */
+        .anim-fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+        }
+        .anim-fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .anim-fade-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+        }
+        .anim-fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .anim-fade-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+        }
+        .anim-fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .anim-scale-in {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .anim-scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
+
+        /* Tab content fade */
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active {
+            display: grid;
+            animation: tabFadeIn 0.45s ease forwards;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-panel {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+        }
+        .mobile-menu-panel.open {
+            transform: translateX(0);
+        }
+        .mobile-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .mobile-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Gallery hover overlay */
+        .gallery-card .gallery-hover {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-card:hover .gallery-hover {
+            opacity: 1;
+        }
+        .gallery-card img {
+            transition: transform 0.6s ease;
+        }
+        .gallery-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Ken Burns for hero image */
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+        .ken-burns { animation: kenBurns 18s ease-in-out infinite alternate; }
+
+        /* Success checkmark */
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .success-icon { animation: scaleIn 0.5s cubic-bezier(.16,1,.3,1) forwards; }
+        .success-check { stroke-dasharray: 50; stroke-dashoffset: 50; animation: drawCheck 0.5s 0.3s ease forwards; }
+
+        /* Spinner */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { animation: spin 0.7s linear infinite; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #faf7f4; }
+        ::-webkit-scrollbar-thumb { background: #c9727a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b5616a; }
+
+        /* Nav link underline effect */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: #c9727a;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Artist card hover border */
+        .artist-card {
+            border: 1.5px solid transparent;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .artist-card:hover {
+            border-color: #c9727a;
+            box-shadow: 0 8px 32px rgba(201,114,122,0.12);
+        }
+    </style>
+</head>
+
+<body class="bg-cream font-body text-dark antialiased overflow-x-hidden">
+
+    <!-- ======================== 1. NAVBAR ======================== -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-cream border-b border-rose/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 lg:h-24">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-3 group" aria-label="The Nail Lab Home">
+                    <img src="logo/logo.png" alt="The Nail Lab Logo" class="h-14 sm:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                    <span class="font-heading text-lg sm:text-xl tracking-super-wide uppercase text-dark">The Nail Lab</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+                    <a href="#home" class="nav-link font-body text-sm tracking-wide text-dark hover:text-rose transition-colors">Home</a>
+                    <a href="#services" class="nav-link font-body text-sm tracking-wide text-dark hover:text-rose transition-colors">Services</a>
+                    <a href="#gallery" class="nav-link font-body text-sm tracking-wide text-dark hover:text-rose transition-colors">Gallery</a>
+                </nav>
+
+                <!-- Desktop CTA -->
+                <a href="#book" class="hidden lg:inline-flex items-center gap-2 bg-rose text-white text-sm font-medium tracking-wide px-5 py-2.5 rounded-full hover:bg-rose-dark transition-colors shadow-warm">
+                    Book Appointment
+                </a>
+
+                <!-- Mobile Hamburger -->
+                <button id="menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5" aria-label="Open menu" aria-expanded="false">
+                    <span class="block w-6 h-[1.5px] bg-dark transition-all duration-300 origin-center" id="bar1"></span>
+                    <span class="block w-6 h-[1.5px] bg-dark transition-all duration-300" id="bar2"></span>
+                    <span class="block w-4 h-[1.5px] bg-dark transition-all duration-300 origin-center ml-auto" id="bar3"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="mobile-overlay fixed inset-0 bg-dark/30 z-50 backdrop-blur-sm"></div>
+
+    <!-- Mobile Menu Panel -->
+    <nav id="mobile-menu" class="mobile-menu-panel fixed top-0 right-0 h-full w-72 sm:w-80 bg-cream z-50 flex flex-col" aria-label="Mobile navigation">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-warm-border">
+            <div class="flex items-center gap-2.5">
+                <img src="logo/logo.png" alt="The Nail Lab Logo" class="h-10 w-auto object-contain">
+                <span class="font-heading tracking-super-wide uppercase text-sm">The Nail Lab</span>
+            </div>
+            <button id="menu-close" class="w-10 h-10 flex items-center justify-center" aria-label="Close menu">
+                <svg class="w-5 h-5 text-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="flex flex-col px-6 py-8 gap-6">
+            <a href="#home" class="mobile-link font-heading text-lg tracking-widest uppercase text-dark hover:text-rose transition-colors">Home</a>
+            <a href="#services" class="mobile-link font-heading text-lg tracking-widest uppercase text-dark hover:text-rose transition-colors">Services</a>
+            <a href="#gallery" class="mobile-link font-heading text-lg tracking-widest uppercase text-dark hover:text-rose transition-colors">Gallery</a>
+            <div class="border-t border-warm-border pt-6 mt-2">
+                <a href="#book" class="block text-center bg-rose text-white font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose-dark transition-colors">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ======================== 2. HERO ======================== -->
+    <section id="home" class="min-h-screen bg-cream pt-24 lg:pt-28 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 lg:py-12 flex flex-col lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+            <!-- Mobile: Image first -->
+            <div class="lg:hidden w-full pt-4 pb-6 anim-fade-up">
+                <div class="relative mx-auto max-w-xs sm:max-w-sm">
+                    <div class="absolute -inset-3 bg-blush rounded-2xl"></div>
+                    <div class="relative overflow-hidden rounded-2xl shadow-warm aspect-square w-full">
+                        <img
+                            src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&h=800&q=80"
+                            alt="Beautiful nail art collection featuring luxury polish colors"
+                            class="w-full h-full object-cover"
+                            fetchpriority="high"
+                            decoding="async"
+                            width="800"
+                            height="800"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="flex flex-col justify-center py-4 lg:py-0">
+                <div class="anim-fade-left">
+                    <span class="inline-block text-rose text-xs font-medium tracking-super-wide uppercase mb-4">Premium Nail &amp; Beauty Studio</span>
+                    <div class="w-16 h-[1px] bg-gold mb-6"></div>
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl text-dark leading-tight tracking-wide mb-6">
+                        Where Beauty Becomes an Art Form
+                    </h1>
+                </div>
+                <div class="anim-fade-left delay-2">
+                    <p class="text-grey text-base sm:text-lg font-light leading-relaxed max-w-lg mb-8">
+                        Indulge in luxury nail care, pedicures, and beauty treatments crafted just for you — because you deserve nothing less.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3 mb-8 anim-fade-left delay-3">
+                    <a href="#book" class="bg-rose text-white text-sm font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose-dark transition-colors shadow-warm">
+                        Book Your Appointment
+                    </a>
+                    <a href="#services" class="border border-rose text-rose text-sm font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose/30 hover:text-rose transition-all duration-300">
+                        Explore Services
+                    </a>
+                </div>
+                <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-grey tracking-wide anim-fade-left delay-4">
+                    <span class="flex items-center gap-1.5"><span class="text-gold">✦</span> 5-Star Rated</span>
+                    <span class="flex items-center gap-1.5"><span class="text-gold">✦</span> Premium Products Only</span>
+                    <span class="flex items-center gap-1.5"><span class="text-gold">✦</span> Certified Nail Artists</span>
+                </div>
+            </div>
+
+            <!-- Desktop: Image right -->
+            <div class="hidden lg:flex items-center justify-center">
+                <div class="relative anim-fade-right delay-2 max-w-md xl:max-w-lg w-full">
+                    <div class="absolute -inset-4 bg-blush rounded-2xl"></div>
+                    <div class="relative overflow-hidden rounded-2xl shadow-warm-lg aspect-square w-full">
+                        <img
+                            src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&h=800&q=80"
+                            alt="Beautiful nail art collection featuring luxury polish colors"
+                            class="w-full h-full object-cover ken-burns"
+                            fetchpriority="high"
+                            decoding="async"
+                            width="800"
+                            height="800"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== 3. BRAND STRIP ======================== -->
+    <section class="bg-blush py-4 overflow-hidden">
+        <div class="relative">
+            <div class="marquee-track flex items-center whitespace-nowrap gap-0">
+                <span class="inline-flex items-center gap-6 px-3 text-sm tracking-widest uppercase text-dark/70 font-light">
+                    <span>Luxury Nail Art</span><span class="text-gold text-xs">✦</span>
+                    <span>Gel &amp; Acrylic</span><span class="text-gold text-xs">✦</span>
+                    <span>Pedicure Spa</span><span class="text-gold text-xs">✦</span>
+                    <span>Nail Extensions</span><span class="text-gold text-xs">✦</span>
+                    <span>Beauty Treatments</span><span class="text-gold text-xs">✦</span>
+                    <span>Certified Artists</span><span class="text-gold text-xs">✦</span>
+                </span>
+                <span class="inline-flex items-center gap-6 px-3 text-sm tracking-widest uppercase text-dark/70 font-light">
+                    <span>Luxury Nail Art</span><span class="text-gold text-xs">✦</span>
+                    <span>Gel &amp; Acrylic</span><span class="text-gold text-xs">✦</span>
+                    <span>Pedicure Spa</span><span class="text-gold text-xs">✦</span>
+                    <span>Nail Extensions</span><span class="text-gold text-xs">✦</span>
+                    <span>Beauty Treatments</span><span class="text-gold text-xs">✦</span>
+                    <span>Certified Artists</span><span class="text-gold text-xs">✦</span>
+                </span>
+                <span class="inline-flex items-center gap-6 px-3 text-sm tracking-widest uppercase text-dark/70 font-light">
+                    <span>Luxury Nail Art</span><span class="text-gold text-xs">✦</span>
+                    <span>Gel &amp; Acrylic</span><span class="text-gold text-xs">✦</span>
+                    <span>Pedicure Spa</span><span class="text-gold text-xs">✦</span>
+                    <span>Nail Extensions</span><span class="text-gold text-xs">✦</span>
+                    <span>Beauty Treatments</span><span class="text-gold text-xs">✦</span>
+                    <span>Certified Artists</span><span class="text-gold text-xs">✦</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== 4. SERVICES ======================== -->
+    <section id="services" class="bg-cream py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-12 anim-fade-up">
+                <span class="text-gold text-xs font-medium tracking-super-wide uppercase">What We Do</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wide mt-3 mb-4">Treatments Designed for You</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto"></div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex justify-center gap-2 sm:gap-4 mb-10 anim-fade-up delay-1">
+                <button class="tab-btn active font-body text-sm sm:text-base tracking-wide px-4 sm:px-6 py-2.5 border-b-2 border-rose text-dark transition-all hover:bg-blush/50 rounded-t" data-tab="nails">
+                    Nail Services
+                </button>
+                <button class="tab-btn font-body text-sm sm:text-base tracking-wide px-4 sm:px-6 py-2.5 border-b-2 border-transparent text-grey transition-all hover:bg-blush/50 rounded-t" data-tab="pedicure-tab">
+                    Pedicure Spa
+                </button>
+                <button class="tab-btn font-body text-sm sm:text-base tracking-wide px-4 sm:px-6 py-2.5 border-b-2 border-transparent text-grey transition-all hover:bg-blush/50 rounded-t" data-tab="beauty">
+                    Beauty Treatments
+                </button>
+            </div>
+
+            <!-- Tab Panels -->
+            <!-- Nail Services -->
+            <div id="panel-nails" class="tab-panel active grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Signature Gel Manicure</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Gel polish, cuticle care, nail shaping — a flawless, long-lasting finish.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$45</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Acrylic Full Set</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Custom length acrylic with art options for the perfect set.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$65</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Nail Art &amp; Design</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Custom hand-painted nail art tailored to your vision.</p>
+                    <p class="text-gold font-medium text-lg mb-4">From $20</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Nail Extensions</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Premium length and shape extensions for bold, beautiful nails.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$75</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+            </div>
+
+            <!-- Pedicure Spa -->
+            <div id="panel-pedicure-tab" class="tab-panel grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Classic Pedicure</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Soak, scrub, trim, polish — everything your feet need to feel refreshed.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$40</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Luxury Spa Pedicure</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Extended soak, hot stone massage, paraffin wax dip, and polished perfection.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$70</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Gel Pedicure</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Long-lasting gel polish with a full pedicure treatment for gorgeous toes.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$55</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Signature Pedicure</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Full spa ritual — exfoliation, mask, massage, and nail art. Our ultimate experience.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$90</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+            </div>
+
+            <!-- Beauty Treatments -->
+            <div id="panel-beauty" class="tab-panel grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Eyebrow Threading &amp; Tint</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Precision shape and tint for perfectly defined brows.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$30</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Lash Lift &amp; Tint</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Lifted, defined lashes that open up your eyes beautifully.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$55</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Facial (Express)</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Deep cleanse, tone, and moisturize — radiant skin in minutes.</p>
+                    <p class="text-gold font-medium text-lg mb-4">$60</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+                <div class="bg-white rounded-xl border-t-[3px] border-blush p-6 shadow-warm hover:shadow-warm-lg transition-shadow group">
+                    <h3 class="font-heading text-lg tracking-wide mb-2 group-hover:text-rose transition-colors">Full Waxing Service</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed mb-4">Brows, lips, underarms, legs — smooth, clean, and gentle.</p>
+                    <p class="text-gold font-medium text-lg mb-4">From $25</p>
+                    <a href="#book" class="inline-block bg-rose text-white text-xs font-medium tracking-wide px-5 py-2 rounded-full hover:bg-rose-dark transition-colors">Book</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======================== 7. GALLERY ======================== -->
+    <section id="gallery" class="bg-white py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 anim-fade-up">
+                <span class="text-gold text-xs font-medium tracking-super-wide uppercase">Our Work</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wide mt-3 mb-4">Every Set Tells a Story</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto"></div>
+            </div>
+
+            <!-- Asymmetric Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 auto-rows-[200px] sm:auto-rows-[240px] lg:auto-rows-[280px]">
+                <!-- Photo 1 — tall -->
+                <div class="gallery-card relative overflow-hidden rounded-xl row-span-2 anim-fade-up delay-1 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80" alt="Luxury nail polish collection" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="gallery-hover absolute inset-0 bg-rose/60 flex items-center justify-center">
+                        <span class="text-white font-heading text-lg tracking-widest uppercase">The Nail Lab</span>
+                    </div>
+                </div>
+                <!-- Photo 2 -->
+                <div class="gallery-card relative overflow-hidden rounded-xl anim-fade-up delay-2 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=500&q=80" alt="Artistic nail design close-up" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="gallery-hover absolute inset-0 bg-rose/60 flex items-center justify-center">
+                        <span class="text-white font-heading text-lg tracking-widest uppercase">The Nail Lab</span>
+                    </div>
+                </div>
+                <!-- Photo 3 -->
+                <div class="gallery-card relative overflow-hidden rounded-xl anim-fade-up delay-3 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=500&q=80" alt="Professional nail painting session" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="gallery-hover absolute inset-0 bg-rose/60 flex items-center justify-center">
+                        <span class="text-white font-heading text-lg tracking-widest uppercase">The Nail Lab</span>
+                    </div>
+                </div>
+                <!-- Photo 4 -->
+                <div class="gallery-card relative overflow-hidden rounded-xl anim-fade-up delay-2 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&w=500&q=80" alt="Elegant nail art designs" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="gallery-hover absolute inset-0 bg-rose/60 flex items-center justify-center">
+                        <span class="text-white font-heading text-lg tracking-widest uppercase">The Nail Lab</span>
+                    </div>
+                </div>
+                <!-- Photo 5 — tall -->
+                <div class="gallery-card relative overflow-hidden rounded-xl row-span-2 anim-fade-up delay-3 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80" alt="Premium manicure service" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="gallery-hover absolute inset-0 bg-rose/60 flex items-center justify-center">
+                        <span class="text-white font-heading text-lg tracking-widest uppercase">The Nail Lab</span>
+                    </div>
+                </div>
+                <!-- Photo 6 -->
+                <div class="gallery-card relative overflow-hidden rounded-xl anim-fade-up delay-4 cursor-pointer">
+                    <img src="logo/nail.jpg" alt="Custom luxury nail art design by The Nail Lab" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="gallery-hover absolute inset-0 bg-rose/60 flex items-center justify-center">
+                        <span class="text-white font-heading text-lg tracking-widest uppercase">The Nail Lab</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram CTA -->
+            <div class="text-center mt-10 anim-fade-up">
+                <a href="https://www.instagram.com/naillab.kamloops/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-rose text-rose text-sm font-medium tracking-wide px-6 py-3 rounded-full hover:bg-rose hover:text-white transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    Follow Us on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== 8. WHY CHOOSE US ======================== -->
+    <section class="bg-blush py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 anim-fade-up">
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wide mb-4">The Nail Lab Difference</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center anim-fade-up delay-1">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-cream flex items-center justify-center">
+                        <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21C7 17 4 13.5 4 10a5 5 0 0110 0h0a5 5 0 0110 0c0 3.5-3 7-8 11z"/>
+                            <path stroke-linecap="round" d="M8 15l2-3 2 2 4-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg tracking-wide mb-2">Premium Products Only</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed">We use only non-toxic, long-lasting, salon-grade products for every treatment.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="text-center anim-fade-up delay-2">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-cream flex items-center justify-center">
+                        <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg tracking-wide mb-2">Certified Artists</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed">Every technician is fully trained and certified to deliver exceptional results.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="text-center anim-fade-up delay-3">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-cream flex items-center justify-center">
+                        <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg tracking-wide mb-2">Hygienic Standards</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed">Tools sterilized between every client, always. Your safety is non-negotiable.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="text-center anim-fade-up delay-4">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-cream flex items-center justify-center">
+                        <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg tracking-wide mb-2">Personalized Experience</h3>
+                    <p class="text-grey text-sm font-light leading-relaxed">Every visit is tailored to your style and preferences. No cookie-cutter treatments.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Rose Divider -->
+        <div class="max-w-5xl mx-auto mt-16"><div class="h-[1px] bg-rose/20"></div></div>
+    </section>
+
+    <!-- ======================== 9. TESTIMONIALS ======================== -->
+    <section class="bg-cream py-20 lg:py-28">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 anim-fade-up">
+                <span class="text-gold text-xs font-medium tracking-super-wide uppercase">Client Love</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wide mt-3 mb-4">What Our Clients Are Saying</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-blush/50 rounded-xl p-6 border-l-[3px] border-rose anim-fade-up delay-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span>
+                        </div>
+                        <p class="text-dark text-sm font-light leading-relaxed italic mb-5">
+                            "The service was superb, and the staff were very accommodating! I love my nails and had a wonderful experience."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-2">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&h=80&q=80" alt="Cristine Joy" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async" width="40" height="40">
+                        <div>
+                            <p class="text-sm font-medium">Cristine Joy</p>
+                            <p class="text-grey text-xs">Kamloops, BC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-blush/50 rounded-xl p-6 border-l-[3px] border-rose anim-fade-up delay-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span>
+                        </div>
+                        <p class="text-dark text-sm font-light leading-relaxed italic mb-5">
+                            "My daughter and I went in July 4th to get our nails done. We both got gel nail extensions. They did an amazing job! It’s now July 26th and they have lasted this long on the both of us. And the prices are unbeatable for the quality done! I’ve had nail extensions before that break off within a week at past places I’ve been to, so I had given up for a long time.<br><br>I highly recommend this nail studio if you want longer lasting nails for better prices!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-2">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=80&h=80&q=80" alt="Marie Mackay" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async" width="40" height="40">
+                        <div>
+                            <p class="text-sm font-medium">Marie Mackay</p>
+                            <p class="text-grey text-xs">Kamloops, BC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-blush/50 rounded-xl p-6 border-l-[3px] border-rose anim-fade-up delay-3 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span><span class="text-rose">★</span>
+                        </div>
+                        <p class="text-dark text-sm font-light leading-relaxed italic mb-5">
+                            "The best in Kamloops! Amazing work every single time, and the sweetest people!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-2">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=80&h=80&q=80" alt="Julia Tourond" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async" width="40" height="40">
+                        <div>
+                            <p class="text-sm font-medium">Julia Tourond</p>
+                            <p class="text-grey text-xs">Kamloops, BC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== 10. BOOKING ======================== -->
+    <section id="book" class="bg-white py-20 lg:py-28">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 anim-fade-up">
+                <span class="text-gold text-xs font-medium tracking-super-wide uppercase">Reservations</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wide mt-3 mb-4">Book Your Appointment</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto mb-5"></div>
+                <p class="text-grey text-base font-light max-w-lg mx-auto leading-relaxed">
+                    Treat yourself. Select your service, pick your artist, and choose your time. It's that simple.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
+                <!-- Form (left 3 cols) -->
+                <div class="lg:col-span-3 anim-fade-up delay-1">
+                    <div id="booking-form-wrapper">
+                        <form id="booking-form" class="space-y-5" novalidate>
+                            <!-- Full Name -->
+                            <div>
+                                <label for="fullName" class="block text-sm font-medium tracking-wide mb-1.5">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" required placeholder="Your full name"
+                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                            </div>
+                            <!-- Phone -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium tracking-wide mb-1.5">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="+1 604-753-9963"
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                    <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium tracking-wide mb-1.5">Email Address</label>
+                                    <input type="email" id="email" name="email" required placeholder="you@example.com"
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                    <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                                </div>
+                            </div>
+                            <!-- Artist -->
+                            <div>
+                                <label for="artist" class="block text-sm font-medium tracking-wide mb-1.5">Select Artist</label>
+                                <select id="artist" name="artist" required
+                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
+                                    <option value="" disabled selected>Choose your artist</option>
+                                    <option value="sophia">Sophia Laurent</option>
+                                    <option value="amara">Amara Osei</option>
+                                    <option value="zoe">Zoe Mitchell</option>
+                                    <option value="nadia">Nadia Ferreira</option>
+                                    <option value="no-preference">No Preference</option>
+                                </select>
+                                <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                            </div>
+                            <!-- Service Category + Specific Service -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="category" class="block text-sm font-medium tracking-wide mb-1.5">Service Category</label>
+                                    <select id="category" name="category" required
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
+                                        <option value="" disabled selected>Select a category</option>
+                                        <option value="nails">Nail Services</option>
+                                        <option value="pedicure">Pedicure Spa</option>
+                                        <option value="beauty">Beauty Treatments</option>
+                                    </select>
+                                    <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                                </div>
+                                <div>
+                                    <label for="service" class="block text-sm font-medium tracking-wide mb-1.5">Specific Service</label>
+                                    <select id="service" name="service" required
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors appearance-none">
+                                        <option value="" disabled selected>Select category first</option>
+                                    </select>
+                                    <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                                </div>
+                            </div>
+                            <!-- Date + Time -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="date" class="block text-sm font-medium tracking-wide mb-1.5">Preferred Date</label>
+                                    <input type="date" id="date" name="date" required
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                    <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                                </div>
+                                <div>
+                                    <label for="time" class="block text-sm font-medium tracking-wide mb-1.5">Preferred Time</label>
+                                    <input type="time" id="time" name="time" required
+                                        class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors">
+                                    <span class="field-error text-rose text-xs mt-1 hidden"></span>
+                                </div>
+                            </div>
+                            <!-- Special Requests -->
+                            <div>
+                                <label for="requests" class="block text-sm font-medium tracking-wide mb-1.5">Special Requests</label>
+                                <textarea id="requests" name="requests" rows="3" placeholder="Any special requests or design inspiration..."
+                                    class="w-full border border-warm-border rounded-lg px-4 py-3 text-sm font-light bg-cream/50 focus:outline-none focus:border-rose focus:ring-1 focus:ring-rose/30 transition-colors resize-none"></textarea>
+                            </div>
+                            <!-- Submit -->
+                            <button type="submit" id="submit-btn"
+                                class="w-full bg-rose text-white font-medium tracking-wide py-3.5 rounded-full hover:bg-rose-dark transition-colors shadow-warm flex items-center justify-center gap-2">
+                                <span id="submit-text">Book My Appointment</span>
+                                <svg id="submit-spinner" class="hidden w-5 h-5 spinner" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-opacity="0.25"/>
+                                    <path d="M12 2a10 10 0 019.95 9" stroke="currentColor" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success Message (hidden initially) -->
+                    <div id="booking-success" class="hidden text-center py-16">
+                        <div class="success-icon mb-6 inline-block">
+                            <svg class="w-20 h-20 mx-auto" viewBox="0 0 80 80">
+                                <circle cx="40" cy="40" r="36" fill="none" stroke="#c9727a" stroke-width="2" opacity="0.2"/>
+                                <circle cx="40" cy="40" r="36" fill="none" stroke="#c9727a" stroke-width="2.5" class="success-check" stroke-dasharray="226" stroke-dashoffset="226" style="animation: drawCheck 0.8s 0.2s ease forwards; stroke-dasharray: 226; stroke-dashoffset: 226;"/>
+                                <path d="M26 40l10 10 18-20" fill="none" stroke="#c9727a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="success-check"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-2xl tracking-wide mb-3">You're all booked in!</h3>
+                        <p class="text-grey text-base font-light">We'll send a confirmation to your email shortly. <span class="text-gold">✦</span></p>
+                        <button onclick="resetForm()" class="mt-6 text-rose text-sm font-medium underline hover:text-rose-dark transition-colors">Book another appointment</button>
+                    </div>
+                </div>
+
+                <!-- Studio Info (right 2 cols) -->
+                <div class="lg:col-span-2 anim-fade-up delay-2">
+                    <div class="bg-cream/70 rounded-xl p-6 sm:p-8 border border-warm-border">
+                        <h3 class="font-heading text-lg tracking-wide mb-5">Studio Information</h3>
+
+                        <!-- Address -->
+                        <div class="flex items-start gap-3 mb-4">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium">3–700 Tranquille Rd, Kamloops</p>
+                                <p class="text-sm font-light text-grey">Inside Straight 8 Barber Shop</p>
+                            </div>
+                        </div>
+                        <!-- Phone -->
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                            </svg>
+                            <a href="tel:+16047539963" class="text-sm font-light hover:text-rose transition-colors">+1 604-753-9963</a>
+                        </div>
+                        <!-- Email -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <svg class="w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                            </svg>
+                            <a href="mailto:hello@thenaillab.com" class="text-sm font-light hover:text-rose transition-colors">hello@thenaillab.com</a>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="h-[1px] bg-warm-border mb-6"></div>
+
+                        <!-- Opening Hours -->
+                        <h4 class="font-heading text-base tracking-wide mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Opening Hours
+                        </h4>
+                        <div class="space-y-2 text-sm font-light mb-6">
+                            <div class="flex justify-between"><span>Mon – Fri</span><span class="text-grey">9:00am – 7:00pm</span></div>
+                            <div class="flex justify-between"><span>Saturday</span><span class="text-grey">9:00am – 6:00pm</span></div>
+                            <div class="flex justify-between"><span>Sunday</span><span class="text-grey">11:00am – 4:00pm</span></div>
+                        </div>
+
+                        <!-- Map Placeholder / Link -->
+                        <a href="https://maps.google.com/?q=3-700+Tranquille+Rd+Kamloops" target="_blank" rel="noopener noreferrer" class="bg-warm-border/40 rounded-lg h-36 flex flex-col items-center justify-center gap-2 mb-6 hover:bg-warm-border/60 transition-colors group cursor-pointer block text-center">
+                            <svg class="w-8 h-8 text-grey/50 group-hover:text-rose transition-colors" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"/>
+                            </svg>
+                            <span class="text-grey/70 group-hover:text-rose text-xs tracking-wide transition-colors">3–700 Tranquille Rd &middot; Open in Google Maps</span>
+                        </a>
+
+                        <!-- Social Links -->
+                        <div class="flex items-center gap-4">
+                            <a href="https://www.instagram.com/naillab.kamloops/" target="_blank" rel="noopener noreferrer" class="text-grey hover:text-rose transition-colors" aria-label="Instagram">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            </a>
+                            <a href="#" class="text-grey hover:text-rose transition-colors" aria-label="TikTok">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.1a8.16 8.16 0 005.58 2.17V11.3a4.85 4.85 0 01-3.77-1.85V6.69h3.77z"/></svg>
+                            </a>
+                            <a href="#" class="text-grey hover:text-rose transition-colors" aria-label="Facebook">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== 11. FOOTER ======================== -->
+    <footer class="bg-dark pt-0 pb-6">
+        <!-- Rose Divider -->
+        <div class="h-[1px] bg-rose/30 mb-12"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                <!-- Left: Logo & Tagline -->
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="logo/logo.png" alt="The Nail Lab Logo" class="h-9 w-auto object-contain brightness-0 invert opacity-90">
+                        <span class="font-heading text-lg tracking-super-wide uppercase text-cream">The Nail Lab</span>
+                    </div>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">Where Beauty Becomes an Art Form</p>
+                    <div class="flex items-center gap-4">
+                        <a href="https://www.instagram.com/naillab.kamloops/" target="_blank" rel="noopener noreferrer" class="text-white/40 hover:text-rose transition-colors" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" class="text-white/40 hover:text-rose transition-colors" aria-label="TikTok">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.1a8.16 8.16 0 005.58 2.17V11.3a4.85 4.85 0 01-3.77-1.85V6.69h3.77z"/></svg>
+                        </a>
+                        <a href="#" class="text-white/40 hover:text-rose transition-colors" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Center: Quick Links -->
+                <div>
+                    <h4 class="font-heading text-sm tracking-super-wide uppercase text-cream mb-4">Quick Links</h4>
+                    <nav class="flex flex-col gap-2.5" aria-label="Footer navigation">
+                        <a href="#services" class="text-white/50 text-sm font-light hover:text-rose transition-colors">Services</a>
+                        <a href="#gallery" class="text-white/50 text-sm font-light hover:text-rose transition-colors">Gallery</a>
+                        <a href="#book" class="text-white/50 text-sm font-light hover:text-rose transition-colors">Book Now</a>
+                    </nav>
+                </div>
+
+                <!-- Right: Contact Info -->
+                <div>
+                    <h4 class="font-heading text-sm tracking-super-wide uppercase text-cream mb-4">Get in Touch</h4>
+                    <div class="space-y-2.5 text-white/50 text-sm font-light">
+                        <p>3–700 Tranquille Rd, Kamloops</p>
+                        <p class="text-xs text-white/40">Inside Straight 8 Barber Shop</p>
+                        <p><a href="tel:+16047539963" class="hover:text-rose transition-colors">+1 604-753-9963</a></p>
+                        <p><a href="mailto:hello@thenaillab.com" class="hover:text-rose transition-colors">hello@thenaillab.com</a></p>
+                        <div class="pt-2">
+                            <p>Mon – Fri: 9am – 7pm</p>
+                            <p>Sat: 9am – 6pm &middot; Sun: 11am – 4pm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-white/10 pt-6 text-center">
+                <p class="text-white/30 text-xs font-light tracking-wide">
+                    &copy; 2026 The Nail Lab. All rights reserved. Crafted with care.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================== JAVASCRIPT ======================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        /* ---- Sticky Navbar ---- */
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y > 50) {
+                navbar.classList.remove('bg-cream');
+                navbar.classList.add('bg-white', 'shadow-warm');
+            } else {
+                navbar.classList.add('bg-cream');
+                navbar.classList.remove('bg-white', 'shadow-warm');
+            }
+            lastScroll = y;
+        }, { passive: true });
+
+        /* ---- Mobile Menu ---- */
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+
+        function openMenu() {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            menuToggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeMenu() {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        menuToggle.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
+
+        // Close menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        /* ---- Smooth Scroll ---- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const offset = navbar.offsetHeight;
+                    const y = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* ---- Service Tabs ---- */
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+
+                // Update buttons
+                tabBtns.forEach(b => {
+                    b.classList.remove('border-rose', 'text-dark');
+                    b.classList.add('border-transparent', 'text-grey');
+                });
+                btn.classList.add('border-rose', 'text-dark');
+                btn.classList.remove('border-transparent', 'text-grey');
+
+                // Update panels
+                tabPanels.forEach(p => p.classList.remove('active'));
+                const panel = document.getElementById('panel-' + target);
+                if (panel) {
+                    // Force animation restart
+                    void panel.offsetWidth;
+                    panel.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize first tab
+        tabBtns[0].classList.add('border-rose', 'text-dark');
+        tabBtns[0].classList.remove('border-transparent', 'text-grey');
+
+        /* ---- Dynamic Service Dropdown ---- */
+        const serviceData = {
+            nails: [
+                { value: 'gel-manicure', label: 'Signature Gel Manicure — $45' },
+                { value: 'acrylic-set', label: 'Acrylic Full Set — $65' },
+                { value: 'nail-art', label: 'Nail Art & Design — From $20' },
+                { value: 'extensions', label: 'Nail Extensions — $75' },
+            ],
+            pedicure: [
+                { value: 'classic-pedi', label: 'Classic Pedicure — $40' },
+                { value: 'luxury-pedi', label: 'Luxury Spa Pedicure — $70' },
+                { value: 'gel-pedi', label: 'Gel Pedicure — $55' },
+                { value: 'signature-pedi', label: 'Signature Pedicure — $90' },
+            ],
+            beauty: [
+                { value: 'brow-thread', label: 'Eyebrow Threading & Tint — $30' },
+                { value: 'lash-lift', label: 'Lash Lift & Tint — $55' },
+                { value: 'facial', label: 'Facial (Express) — $60' },
+                { value: 'waxing', label: 'Full Waxing Service — From $25' },
+            ]
+        };
+
+        const categorySelect = document.getElementById('category');
+        const serviceSelect = document.getElementById('service');
+
+        categorySelect.addEventListener('change', () => {
+            const cat = categorySelect.value;
+            const services = serviceData[cat] || [];
+            serviceSelect.innerHTML = '<option value="" disabled selected>Select a service</option>';
+            services.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.value;
+                opt.textContent = s.label;
+                serviceSelect.appendChild(opt);
+            });
+        });
+
+        /* ---- Scroll Animations (IntersectionObserver) ---- */
+        const animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right, .anim-scale-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        animElements.forEach(el => observer.observe(el));
+
+        /* ---- Form Validation ---- */
+        const form = document.getElementById('booking-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+        const submitSpinner = document.getElementById('submit-spinner');
+
+        const validators = {
+            fullName: (v) => v.trim().length >= 2 ? '' : 'Please enter your full name',
+            phone: (v) => /^[\+]?[\d\s\-\(\)]{7,}$/.test(v.trim()) ? '' : 'Please enter a valid phone number',
+            email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Please enter a valid email address',
+            artist: (v) => v ? '' : 'Please select an artist',
+            category: (v) => v ? '' : 'Please select a service category',
+            service: (v) => v ? '' : 'Please select a specific service',
+            date: (v) => v ? '' : 'Please select a preferred date',
+            time: (v) => v ? '' : 'Please select a preferred time',
+        };
+
+        function validateField(field) {
+            const name = field.name || field.id;
+            const validator = validators[name];
+            if (!validator) return true;
+
+            const error = validator(field.value);
+            const errorEl = field.parentElement.querySelector('.field-error');
+            if (error) {
+                field.classList.add('border-rose');
+                field.classList.remove('border-warm-border');
+                if (errorEl) {
+                    errorEl.textContent = error;
+                    errorEl.classList.remove('hidden');
+                }
+                return false;
+            } else {
+                field.classList.remove('border-rose');
+                field.classList.add('border-warm-border');
+                if (errorEl) {
+                    errorEl.classList.add('hidden');
+                }
+                return true;
+            }
+        }
+
+        // Validate on blur
+        form.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('blur', () => validateField(field));
+            field.addEventListener('change', () => validateField(field));
+        });
+
+        // Submit
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let isValid = true;
+            form.querySelectorAll('input[required], select[required]').forEach(field => {
+                if (!validateField(field)) isValid = false;
+            });
+
+            if (!isValid) return;
+
+            // Show spinner
+            submitBtn.disabled = true;
+            submitText.textContent = 'Booking...';
+            submitSpinner.classList.remove('hidden');
+
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('booking-form-wrapper').classList.add('hidden');
+                document.getElementById('booking-success').classList.remove('hidden');
+            }, 2000);
+        });
+
+        // Reset form
+        window.resetForm = function() {
+            form.reset();
+            serviceSelect.innerHTML = '<option value="" disabled selected>Select category first</option>';
+            document.getElementById('booking-form-wrapper').classList.remove('hidden');
+            document.getElementById('booking-success').classList.add('hidden');
+            submitBtn.disabled = false;
+            submitText.textContent = 'Book My Appointment';
+            submitSpinner.classList.add('hidden');
+            // Reset field borders
+            form.querySelectorAll('input, select').forEach(f => {
+                f.classList.remove('border-rose');
+                f.classList.add('border-warm-border');
+            });
+            form.querySelectorAll('.field-error').forEach(e => e.classList.add('hidden'));
+        };
+
+        /* ---- Set min date to today ---- */
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+    })();
+    </script>
+
+</body>
+</html>
